@@ -445,3 +445,9 @@ div#level-selection button:hover {
 button.hidden {
     display: none;
 }
+
+@media (max-width: 1500px) {
+    html {
+        font-size: 12px;
+    }
+}
