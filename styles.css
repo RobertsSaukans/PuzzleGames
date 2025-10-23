@@ -1,0 +1,447 @@
+body {
+    height: 100vh;
+    margin: 0;
+    padding: 0;
+    background-color: #757575;
+    color: black;
+}
+
+main {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+main.mainPage {
+    display: inline;
+}
+
+ul.list {
+    font-size: 1.8rem;
+    margin-left: 10vw;
+}
+
+ul.list li {
+    padding: 0.5rem;
+}
+
+button#readmore, button#readmore2{
+    font-size: 1.9rem;
+    background-color: #757575;
+    border: none;
+}
+
+button#readmore:hover, button#readmore2:hover{
+    color: #1a2185;
+    cursor: pointer;
+}
+
+div#info, div#info2 {
+    max-width: 75vw;
+    width: 100%;
+    display: none;
+}
+
+div#info p, div#info2 p {
+    background-color: #686868;
+    border-radius: 1rem;
+    padding: 0.5rem;
+}
+
+div#info a, div#info2 a {
+    text-decoration: none;
+    color: black;
+}
+
+div#info a:hover, div#info2 a:hover {
+    color: #1a2185;
+}
+
+p.textParagraph {
+    text-align: center;
+    font-size: 2rem;
+    margin: 0;
+}
+
+h1.welcome {
+    text-align: center;
+    font-size: clamp(2rem, 5vw, 3.1rem);
+    margin-top: 0.7rem;
+}
+
+nav ul{
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    padding: 0.6rem;
+    margin: 0;
+    background-color:black;
+    list-style-type: none;
+}
+
+nav ul li a{
+    text-decoration: none;
+    color: rgb(255, 255, 255);
+    font-size: 2rem;
+}
+
+nav ul li a:hover {
+    color: #427992;
+}
+
+nav ul li a img:hover {
+    outline: #427992;
+    opacity: 60%;
+}
+
+.tic-tac-toe{
+    width: 5rem;
+}
+
+.connect-four {
+    width: 5rem;
+}
+
+#retryBlock {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#return {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    margin-bottom: 1.5rem;
+}
+
+#returnbtn {
+    margin-top: 5rem;
+    margin-left: 0.7rem;
+    width: 7.5rem;
+    height: 3.4rem;
+    font-size: 1.6rem;
+    font-weight: 600;
+    border: 0.15rem solid black;
+    background-color: #3ebfd6;
+    cursor: pointer;
+    border-radius: 1.2rem;
+    position: absolute;
+    left: 0;
+    cursor: pointer;
+}
+
+#returnbtn:hover {
+    background-color: #3195a7;
+}
+
+#retrybtn {
+    width: 8.1rem;
+    height: 4rem;
+    font-size: 2.8rem;
+    border: 0.15rem solid #000;
+    background-color: #43d63e;
+    cursor: pointer;
+    border-radius: 1.2rem;
+    margin-bottom: 1.2rem;
+}
+
+#retrybtn:hover {
+    background-color: #37ac33;
+}
+
+div#gamemode, div#score {
+    text-align: center;
+    font-size: 4.375rem;
+    margin-bottom: 1.25rem;
+    margin-top: 0.625rem;
+}
+
+div#score {
+    font-size: 3.125rem;
+}
+
+#gamemode button {
+    display: block;
+    margin: 0.625rem auto;
+    padding: 0.625rem 1.25rem;
+    font-size: 1.5625rem;
+    font-weight: 600;
+    border-radius: 0.625rem;
+}
+
+#singlePlayerbtn {
+    background-color: red;
+}
+
+#singlePlayerbtn:hover {
+    background-color: #b90101;
+}
+
+#twoPlayerbtn {
+    background-color: rgb(0, 102, 255);
+}
+
+#twoPlayerbtn:hover {
+    background-color: rgb(0, 85, 212);
+}
+
+#gamemode button:hover {
+    cursor: pointer;
+}
+
+#diff {
+    text-align: center;
+    font-size: 4.375rem;
+    margin-top: 0.625rem;
+}
+
+#level1 {
+    background-color: #58d838;
+}
+
+#level1:hover {
+    background-color: #4abd2d;
+}
+
+#level2 {
+    background-color: #e0eb4d;
+}
+
+#level2:hover {
+    background-color: #b4bd3e;
+}
+
+#level3 {
+    background-color: #ff0000;
+}
+
+#level3:hover {
+    background-color: #b90101;
+}
+
+#levels button {
+    display: block;
+    margin: 0.625rem auto;
+    padding: 0.625rem 1.25rem;
+    font-size: 1.5625rem;
+    font-weight: 600;
+    border-radius: 0.625rem;
+}
+
+#levels button:hover {
+    cursor: pointer;
+}
+
+p#textbtn {
+    margin-top: 0.625rem;
+    margin-bottom: 1.25rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 4.375rem;
+    color: rgb(0, 0, 0);
+}
+
+#board {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.625rem;
+    padding: 1.25rem;
+    border-radius: 0.625rem;
+    width: 29.375rem;
+    background-color: rgb(0, 0, 0);
+}
+
+#board button {
+    width: 9.375rem;
+    height: 9.375rem;
+    font-size: 6.25rem;
+    border: 0.125rem solid #000;
+    background-color: #fff;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 1.25rem;
+}
+
+#board button:hover {
+    background-color: rgb(202, 202, 202);
+}
+
+.container {
+    text-align: center;
+}
+
+p#statusText {
+    text-align: center;
+    font-size: 4.375rem;
+    font-weight: 100;
+    margin-bottom: 0.625rem;
+    margin-top: 0.625rem;
+}
+
+#mode-selection {
+    margin-bottom: 1.25rem;
+}
+
+#mode-selection button {
+    display: block;
+    margin: 0.625rem auto;
+    padding: 0.625rem 1.25rem;
+    font-size: 1.5625rem;
+    font-weight: 600;
+    border-radius: 0.625rem;
+}
+  
+#singlePlayerBtn {
+    background-color: red;
+}
+
+#singlePlayerBtn:hover {
+    background-color: #b90101;
+}
+
+#twoPlayerBtn {
+    background-color: rgb(0, 102, 255);
+}
+
+#twoPlayerBtn:hover {
+    background-color: rgb(0, 85, 212);
+}
+
+#mode-selection button:hover {
+    cursor: pointer;
+}
+
+#retryBtn {
+    width: 7.5rem;
+    height: 3.75rem;
+    font-size: 2.5rem;
+    border: 0.125rem solid #000;
+    background-color: #43d63e;
+    cursor: pointer;
+    border-radius: 1.25rem;
+    margin-bottom: 0.3125rem;
+}
+
+#retryBtn:hover {
+    background-color: #37ac33;
+}
+
+#returnDiv {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    margin-bottom: 1.25rem;
+}
+
+#returnBtn {
+    margin-top: 4.375rem;
+    margin-left: 0.625rem;
+    width: 7.5rem;
+    height: 3.4375rem;
+    font-size: 1.5625rem;
+    font-weight: 600;
+    border: 0.125rem solid #000;
+    background-color: #3ebfd6;
+    cursor: pointer;
+    border-radius: 1.25rem;
+    position: absolute;
+    left: 0;
+}
+
+#returnBtn:hover {
+    background-color: #3195a7;
+}
+
+#level-selection  {
+    display: none;
+}
+
+#level-selection button {
+    display: block;
+    margin: 0.625rem auto;
+    padding: 0.625rem 1.25rem;
+    font-size: 1.5625rem;
+    font-weight: 600;
+    color: black;
+    border-radius: 0.625rem;
+}
+
+#levels-selection button:hover {
+    cursor: pointer;
+}
+
+div#score2 {
+    text-align: center;
+    font-size: 3.125rem;
+}
+
+#level-1 {
+    background-color: #58d838;
+}
+
+#level-1:hover {
+    background-color: #4abd2d;
+}
+
+#level-2 {
+    background-color: #e0eb4d;
+}
+
+#level-2:hover {
+    background-color: #b4bd3e;
+}
+
+#level-3 {
+    background-color: #ff0000;
+}
+
+#level-3:hover {
+    background-color: #b90101;
+}
+
+div#level-selection button:hover {
+    cursor: pointer;
+}
+  
+.board {
+    display: grid;
+    grid-template-columns: repeat(7, 3.125rem);
+    grid-gap: 1.75rem;
+    grid-row-gap: 0.4375rem;
+    justify-content: center;
+    margin: 1.25rem auto;
+}
+
+.cell {
+    width: 4.375rem;
+    height: 4.375rem;
+    background-color: #2563eb;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 0.125rem 0.3125rem rgba(0, 0, 0, 0.3);
+}
+
+.cell.win {
+    border: 0.1875rem solid black;
+    box-shadow: 0 0 0.375rem rgba(0,0,0,0.3);
+}
+  
+.cell.red {
+    background-color: red;
+}
+  
+.cell.yellow {
+    background-color: yellow;
+}
+
+button.hidden {
+    display: none;
+}
