@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Stili no styles.css (izkārtojums, krāsas, .board .cell utt.) -->
+  <link rel="stylesheet" type="text/css" href="styles.css">
+  <title>Puzzle Games</title>
+</head>
+<body>
+<header>
+    <nav>
+        <ul>
+            <!-- Navigācija uz citām spēlēm/galveno lapu -->
+            <li><a href="index.html">Home</a></li>
+            <li><a href="tic-tac-toe.html"><img class="tic-tac-toe" src="tic-tac-toe.png"></a></li>
+            <li><a href="connect-four.html"><img class="connect-four" src="connect-four.png"></a></li>
+        </ul>
+    </nav>
+</header>
+
+<main class="mainPage">
+  <div class="container">
+    <!-- Statuss/ziņa lietotājam (kura spēle/režīms/uzvara utt.) -->
+    <p id="statusText">Choose the gamemode!</p>
+
+    <!-- Sākotnējā izvēle: single / two player -->
+    <div id="mode-selection">
+      <button id="singlePlayerBtn">Single Player</button>
+      <button id="twoPlayerBtn">Two Player</button>
+    </div>
+
+    <!-- Atgriešanās poga (parādīta tikai, kad nepieciešams) -->
+    <div id="returnDiv">
+      <button id="returnBtn">Return</button>
+    </div>
+
+    <!-- Grūtības izvēle (parādās single-player režīmā) -->
+    <div id="level-selection">
+      <button id="level-1">Regular</button>
+      <button id="level-2">Hard</button>
+      <button id="level-3">Impossible</button>
+    </div>
+
+    <!-- Retry poga: parādās pēc spēles beigām -->
+    <button id="retryBtn" class="hidden">Retry</button>
+
+    <!-- Spēles laukums — šeit JS (script2.js) ģenerē .cell elementus -->
+    <div id="gameBoard" class="board">
+    </div>
+
+    <!-- Vienkāršs score bloks (single-player vai cits UI) -->
+    <div id="score">
+        <p id="scoreText">Wins: 0 Ties: 0 Losses: 0</p>
+    </div>
+    <!-- Alternatīvs score bloks (var izmantot divos spēļu režīmos) -->
+    <div id="score2">
+        <p id="scoreText2">Red: 0 Yellow: 0 Ties: 0</p>
+    </div>
+  </div>
+
+  <!-- Spēles loģika un event handleri (JS ģenerē rūtiņas, kontrolē gājienus, AI utt.) -->
+  <script src="script2.js"></script>
+</main>
+</body>
+</html>
