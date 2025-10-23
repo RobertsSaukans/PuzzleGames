@@ -448,6 +448,18 @@ button.hidden {
 
 @media (max-width: 1500px) {
     html {
-        font-size: 12px;
+        font-size: 11px;
+    }
+    ul.list {
+        margin-left: 8vw;
+    }
+}
+
+@media (max-width: 800px) {
+    html {
+        font-size: 9px;
+    }
+    ul.list {
+        margin-left: 4vw;
     }
 }
