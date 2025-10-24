@@ -76,6 +76,8 @@ function createBoard() {
       cell.dataset.col = col;
       // Katram cell pievienots click handler, kas apstrādā gājienus
       cell.addEventListener("click", BoardControlAndTwoPlayerMode);
+      cell.addEventListener("mouseover", handleHover);
+      cell.addEventListener("mouseout", clearHover);
       board.appendChild(cell);
     }
   }
@@ -101,7 +103,10 @@ async function singlePlayerMode (button) {
           if (!gameBoard[row][playerCol]) {
             gameBoard[row][playerCol] = currentPlayer;
             const cell = document.querySelector(`.cell[data-row="${row}"][data-col="${playerCol}"]`);
-            if (cell) cell.classList.add(currentPlayer);
+            if (cell) {
+              cell.classList.remove(currentPlayer === "red" ? "highlightRed" : "highlightYellow");
+              cell.classList.add(currentPlayer);
+            }
             playerPlaced = true;
 
             // Pārbauda uzvaru tūlīt pēc spēlētāja gājiena
@@ -231,6 +236,7 @@ function BoardControlAndTwoPlayerMode(button) {
       const cell = document.querySelector(
         `.cell[data-row="${row}"][data-col="${col}"]`
       );
+      cell.classList.remove(currentPlayer === "red" ? "highlightRed" : "highlightYellow");
       cell.classList.add(currentPlayer);
       if (checkWin(currentPlayer)) {
         gameover = true;
@@ -829,12 +835,43 @@ function toggleVisibilityBlock(element) {
   }
 }
 
+// Hover efekts — Parāda zemāko pieejamo šūnu kolonnā
+function handleHover(e) {
+  const col = parseInt(e.target.dataset.col);
+
+  // Atrodi zemāko brīvo rindu šajā kolonnā
+  for (let row = ROWS - 1; row >= 0; row--) {
+    if (gameBoard[row][col] === null) {
+      const selector = `.cell[data-row="${row}"][data-col="${col}"]`;
+      const cellToHighlight = document.querySelector(selector);
+      if (cellToHighlight) {
+        cellToHighlight.classList.add(currentPlayer === "red" ? "highlightRed" : "highlightYellow");
+      }
+      break;
+    }
+  }
+}
+
+// Funkcija, kas noņem hover efektu
+function clearHover(e) {
+  const col = parseInt(e.target.dataset.col);
+
+  // Noņem uzsvaru no visām šūnām šajā kolonnā
+  for (let row = 0; row < ROWS; row++) {
+    const selector = `.cell[data-row="${row}"][data-col="${col}"]`;
+    const cell = document.querySelector(selector);
+    if (cell) {
+      cell.classList.remove(currentPlayer === "red" ? "highlightRed" : "highlightYellow");
+    }
+  }
+}
+
 // Līmeņa pogu event listeneri
 level1.addEventListener('click', function () { levelChoice(level1); });
 level2.addEventListener('click', function () { levelChoice(level2); });
 level3.addEventListener('click', function () { levelChoice(level3); });
 
-returnBtn.addEventListener('click', function () { returnButton(); }); 
+returnBtn.addEventListener('click', function () { returnButton(); });
 
 // Inicializē spēles laukumu pie lapas ielādes
 createBoard();

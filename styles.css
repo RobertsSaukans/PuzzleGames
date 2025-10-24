@@ -2,6 +2,7 @@ body {
     height: 100vh;
     margin: 0;
     padding: 0;
+    padding-bottom: 2vh;
     background-color: #757575;
     color: black;
 }
@@ -427,6 +428,18 @@ div#level-selection button:hover {
     align-items: center;
     justify-content: center;
     box-shadow: 0 0.125rem 0.3125rem rgba(0, 0, 0, 0.3);
+}
+
+.cell.highlightRed {
+  background-color: red;
+  opacity: 0.5;
+  cursor: pointer;
+}
+
+.cell.highlightYellow {
+  background-color: yellow;
+  opacity: 0.5;
+  cursor: pointer;
 }
 
 .cell.win {
