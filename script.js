@@ -4,7 +4,6 @@
 
 document.addEventListener('DOMContentLoaded', function () {
     // DOM references — pogas un UI elementi
-    var board = document.getElementById('board');
     var btn1 = document.getElementById('btn1');
     var btn2 = document.getElementById('btn2');
     var btn3 = document.getElementById('btn3');
@@ -46,23 +45,24 @@ document.addEventListener('DOMContentLoaded', function () {
    // Spēles stāvokļa mainīgie (kam īss paskaidrojums zemāk)
     let currentGameMode = "Two Player"; // režīms: "Two Player", "Regular", "Hard", "Impossible"
     let Xturn = true;                   // kura puse gājienā (true — X)
-    let gameover = false;               // vai spēle beigusies
+    let gameover = true;                // vai spēle beigusies
     let gamestart = false;              // vai spēle sākta (two-player starts)
     let singlePlayerStart = false;      // vai single-player režīms aktīvs
     let first = true;                   // iekšējais karogs pirmajam gājienam
     let compStart = false;              // vai dators sāk spēli
     let gameCount = 1;                  // kopējais spēļu skaits
     let turnCount = 1;                  // gājienu skaits
-    let playerSymbol;                   // spēlētāja simbols "X" vai "O"
+    let playerSymbol = "X";             // spēlētāja simbols "X" vai "O"
     let playerColor;                    // spēlētāja krāsa ("red"/"blue")
     let compSymbol;                     // datora simbols
     let compColor;                      // datora krāsa
-    let compStartChoice = 0;            // datora izvēles uzstādījumi
-    let compSecondChoice = 0;
+    let compStartChoice = 0;            // datora pirmā izvēle
+    let compSecondChoice = 0;           // datora otrais gājiens
     let playerStartChoice = 0;          // kurā pozīcijā spēlētājs sāka
     let wins = 0;                       // uzvaras
     let ties = 0;                       // neizšķirti
     let losses = 0;                     // zaudējumi
+    let winPositions = [];              // uzvaras pozīciju saraksts
 
     // Pārvieto lietotāju uz sākumlapu
     function returnButton () {
@@ -77,6 +77,7 @@ document.addEventListener('DOMContentLoaded', function () {
         } else {
             toggleVisibilityFlex(gamemodediv);
             toggleVisibilityFlex(textbtn);
+            gameover = false;
             gamestart = true;
             toggleVisibilityBlock(diff);
             toggleVisibilityBlock(score2);
@@ -94,6 +95,7 @@ document.addEventListener('DOMContentLoaded', function () {
         turnCount = 1;
         gameCount = 1;
         singlePlayerStart = true;
+        gameover = false;
         if (button.textContent.trim() === "Regular") {
             currentGameMode = "Regular";
         } 
@@ -123,15 +125,15 @@ document.addEventListener('DOMContentLoaded', function () {
     function symbolDeclaration() {
         if (gameCount % 2 !== 0) {
             playerSymbol = "X";
-            playerColor = "red";
+            playerColor = "#ff2525ff";
             compSymbol = "O"
-            compColor = "blue";
+            compColor = "#00ffff";
         }
         else {
             playerSymbol = "O";
-            playerColor = "blue";
+            playerColor = "#00ffff";
             compSymbol = "X";
-            compColor = "red";
+            compColor = "#ff2525ff";
         }
     }
 
@@ -155,10 +157,10 @@ document.addEventListener('DOMContentLoaded', function () {
             button.style.color = playerColor;
             if (win(playerSymbol)) {
                 wins++;
+                highlightWinPositions();
                 score.textContent = "Wins: " + wins + " Ties: " + ties + " Losses: " + losses;
                 textbtn.textContent = "You won!";
                 gameover = true;
-                board.style.backgroundColor = playerColor;
                 toggleVisibilityBlock(retrybtn);
                 return;
             }
@@ -216,11 +218,11 @@ document.addEventListener('DOMContentLoaded', function () {
             buttons[computerChoice-1].textContent = compSymbol;
             buttons[computerChoice-1].style.color = compColor;
             if (win(compSymbol)) {
+                highlightWinPositions();
                 losses++;
                 score.textContent = "Wins: " + wins + " Ties: " + ties + " Losses: " + losses;
                 textbtn.textContent = "You lost!";
                 gameover = true;
-                board.style.backgroundColor = compColor;
                 toggleVisibilityBlock(retrybtn);
                 return;
             }
@@ -239,6 +241,10 @@ document.addEventListener('DOMContentLoaded', function () {
    // Ja single-player režīms aktīvs, padod klikšķi uz singlePlayerMode.
    // Citādi — apstrādā X/O maiņu, uzvaras pārbaudes un UI atjaunināšanu.
    function BoardControlAndTwoPlayerMode(button) {
+        if (button.classList.contains("previewX") || button.classList.contains("previewO") || button.classList.contains("win")) {
+            button.classList.remove("previewX", "previewO", "win");
+            button.textContent = "";
+        }
         if (singlePlayerStart === true && gameover === false) {
             singlePlayerMode(button);
         }
@@ -249,16 +255,16 @@ document.addEventListener('DOMContentLoaded', function () {
             if (Xturn) {
                 Xturn = false;
                 button.textContent = "X";
-                button.style.color = "red";
+                button.style.color = "#ff2525ff";
                 if (win("X")) {
                     wins++;
+                    highlightWinPositions();
                     if (textbtn.textContent === "Player 2, pick your position!") {
                         textbtn.textContent = "Player 2 wins!";
                     }
                     textbtn.textContent = "Player 1 wins!";
                     score2.textContent = "Player 1: " + wins + " Player 2: " + losses + " Ties: " + ties;
                     gameover = true;
-                    board.style.backgroundColor = "red";
                     toggleVisibilityBlock(retrybtn);
                     return;
                 }
@@ -272,16 +278,16 @@ document.addEventListener('DOMContentLoaded', function () {
             else {
                 Xturn = true;
                 button.textContent = "O";
-                button.style.color = "blue";
+                button.style.color = "#00ffff";
                 if (win("O")) {
                     losses++;
+                    highlightWinPositions();
                     if (textbtn.textContent === "Player 1, pick your position!") {
                         textbtn.textContent = "Player 1 wins!";
                     }
                     textbtn.textContent = "Player 2 wins!";
                     score2.textContent = "Player 1: " + wins + " Player 2: " + losses + " Ties: " + ties;
                     gameover = true;
-                    board.style.backgroundColor = "blue";
                     toggleVisibilityBlock(retrybtn);
                     return;
                 }
@@ -774,6 +780,7 @@ function cornerCheck(freeCorners) {
 function win(symbol) {
     var win = false;
     var positions = [];
+    winPositions = []; 
     var pos = 1;
     buttons.forEach(function(button) {
         if (button.textContent === symbol) {
@@ -782,25 +789,26 @@ function win(symbol) {
         pos++;
     });
 
-    var rone = 0, rtwo = 0, rthree = 0, rdiagonal = 0;
-    var cone = 0, ctwo = 0, cthree = 0, cdiagonal = 0;
-    for (var n of positions) {
-        if (n == 1 || n == 2 || n == 3) { rone++; }
-        else if (n == 4 || n == 5 || n == 6) { rtwo++; }
-        else if (n == 7 || n == 8 || n == 9) { rthree++; }
-
-        if (n == 1 || n == 4 || n == 7) { cone++; }
-        else if (n == 2 || n == 5 || n == 8) { ctwo++; }
-        else if (n == 3 || n == 6 || n == 9) { cthree++; }
-
-        if (n == 1 || n == 5 || n == 9) { rdiagonal++; }
-        if ( n == 3 || n == 5 || n == 7) { cdiagonal++; }
+    for (const combo of winningCombinations) {
+        if (combo.every(n => positions.includes(n))) {
+            win = true;
+            winPositions = combo;
+            break;
+        }
     }
 
-    if (rone == 3 || rtwo == 3 || rthree == 3 || rdiagonal == 3 || cone == 3 || ctwo == 3 || cthree == 3 || cdiagonal == 3) {
-        win = true;
-    }
     return win;
+}
+
+// Funkcija, kas uzsver uzvaras pozīcijas
+function highlightWinPositions() {
+  if (!Array.isArray(winPositions) || winPositions.length === 0) return;
+  winPositions.forEach(pos => {
+    const button = document.getElementById(`btn${pos}`);
+    if (button) {
+      button.classList.add('win');
+    }
+  });
 }
 
 // Palīgs: pārveido pogas elementu uz pozīciju indeksu (1..9)
@@ -862,17 +870,19 @@ retrybtn.addEventListener('click', function () {
     resetGame(currentGameMode);
 });
 
-function resetGame(mode) {
+async function resetGame(mode) {
     first = true;
     turnCount = 1;
     gameover = false;
     gameCount++;
+    winPositions = [];
     buttons.forEach(button => {
         button.textContent = "";
+        button.classList.remove("previewX", "previewO", "win");
+        button.style.color = "";
     });
     if (mode === 'Two Player') {
         gamestart = true;
-        board.style.backgroundColor = "black";
         retrybtn.style.display = 'none';
         if (gameCount % 2 == 0) {
             textbtn.textContent = "Player 2, pick your position!";
@@ -884,7 +894,6 @@ function resetGame(mode) {
     } 
     else {
         singlePlayerStart = true;
-        board.style.backgroundColor = "black";
         retrybtn.style.display = 'none';
         textbtn.textContent = "Choose your position!";
         freePositions = [1, 2, 3, 4, 5, 6, 7, 8, 9];
@@ -893,6 +902,11 @@ function resetGame(mode) {
         compSecondChoice = 0;
         compStart = false;
         if (gameCount % 2 == 0) {
+            singlePlayerStart = false;
+            textbtn.textContent = "The computer is thinking...";
+            await sleep(1000);
+            textbtn.textContent = "Choose your position!";
+            singlePlayerStart = true;
             compStart = true;
             compStartChoice = getRandomPosition(freePositions);
             removeElement(freePositions, compStartChoice);
@@ -900,6 +914,37 @@ function resetGame(mode) {
             buttons[compStartChoice-1].style.color = compColor;
         }
     }
+}
+
+// Hover efekts — parāda, kur spēlētājs var ievietot savu simbolu
+function handleHover(e) {
+  const button = e.target;
+  if (gameover) return;
+  if (currentGameMode !== 'Two Player' && !singlePlayerStart) return;
+
+  // Tikai parāda priekšskatījumu, ja poga ir tukša
+  if (button.textContent.trim() === "") {
+    if (currentGameMode === 'Two Player') {
+        button.textContent = Xturn ? "X" : "O";
+        button.classList.add(Xturn ? "previewX" : "previewO");
+    }
+    else {
+        button.textContent = playerSymbol === "X" ? "X" : "O";
+        button.classList.add(playerSymbol === "X" ? "previewX" : "previewO");
+    }
+  }
+}
+
+// Noņem hover priekšskatījumu, kad pele atstāj pogu
+function clearHover(e) {
+  const button = e.target;
+
+  // Noņem priekšskatījuma tekstu tikai tad, ja tas ir "spoks" (nevis faktisks gājiens)
+  if (button.classList.contains("previewX") || button.classList.contains("previewO")) {
+    button.textContent = "";
+    button.classList.remove("previewX", "previewO");
+    button.style.color = "";
+  }
 }
 
 // Piesaistam klikšķu notikumus pogām un UI pogām
@@ -919,6 +964,11 @@ twoPlayerbtn.addEventListener('click', function () { gameModeChoice(twoPlayerbtn
 level1.addEventListener('click', function () { levelChoice(level1); });
 level2.addEventListener('click', function () { levelChoice(level2); });
 level3.addEventListener('click', function () { levelChoice(level3); });
+
+document.querySelectorAll("#board button").forEach(btn => {
+  btn.addEventListener('mouseenter', handleHover);
+  btn.addEventListener('mouseleave', clearHover);
+});
 
 returnbtn.addEventListener('click', function () { returnButton(); }); 
 

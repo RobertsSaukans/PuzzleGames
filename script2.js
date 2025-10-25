@@ -838,6 +838,7 @@ function toggleVisibilityBlock(element) {
 // Hover efekts — Parāda zemāko pieejamo šūnu kolonnā
 function handleHover(e) {
   const col = parseInt(e.target.dataset.col);
+  if (gameover === true) return;
 
   // Atrodi zemāko brīvo rindu šajā kolonnā
   for (let row = ROWS - 1; row >= 0; row--) {
