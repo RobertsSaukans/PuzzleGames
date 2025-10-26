@@ -88,7 +88,7 @@ nav ul{
 
 nav ul li a{
     text-decoration: none;
-    color: rgb(255, 255, 255);
+    color: #d3cfcf;
     font-size: 2rem;
 }
 
@@ -175,7 +175,7 @@ div#score {
 
 #gamemode button {
     font-family: system-ui;
-    border: solid #fff;
+    border: solid #d3cfcf;;
     text-transform: uppercase;
     display: block;
     margin: 0.625rem auto;
@@ -183,7 +183,7 @@ div#score {
     font-size: 1.5625rem;
     font-weight: 600;
     border-radius: 0.625rem;
-    color: white;
+    color: #d3cfcf;
 }
 
 #singlePlayerbtn {
@@ -346,7 +346,7 @@ p#statusText {
 
 #mode-selection button {
     font-family: system-ui;
-    border: solid #fff;
+    border: solid #d3cfcf;
     text-transform: uppercase;
     display: block;
     margin: 0.625rem auto;
@@ -354,7 +354,7 @@ p#statusText {
     font-size: 1.5625rem;
     font-weight: 600;
     border-radius: 0.625rem;
-    color: rgb(255, 255, 255);
+    color: #d3cfcf;
 }
   
 #singlePlayerBtn {
@@ -429,7 +429,7 @@ p#statusText {
 
 #level-selection button {
     font-family: system-ui;
-    border: solid #fff;
+    border: solid #000000;
     text-transform: uppercase;
     display: block;
     margin: 0.625rem auto;
