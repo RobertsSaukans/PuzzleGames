@@ -2,7 +2,6 @@ body {
     height: 100vh;
     margin: 0;
     padding: 0;
-    padding-bottom: 2vh;
     background-color: #263046;
     color: #d3cfcf;
     font-family: monospace;
@@ -29,12 +28,14 @@ ul.list li {
 
 button#readmore, button#readmore2{
     font-size: 1.9rem;
-    background-color: #757575;
+    background-color: #263046;
     border: none;
+    color: #d3cfcf;
+    font-family: system-ui;
 }
 
 button#readmore:hover, button#readmore2:hover{
-    color: #1a2185;
+    color: #427992;
     cursor: pointer;
 }
 
@@ -45,30 +46,34 @@ div#info, div#info2 {
 }
 
 div#info p, div#info2 p {
-    background-color: #686868;
+    background-color: #263046;
     border-radius: 1rem;
     padding: 0.5rem;
+    border: 0.5rem solid #3ebfd6;
 }
 
 div#info a, div#info2 a {
     text-decoration: none;
-    color: black;
+    color: #3ebfd6;
 }
 
 div#info a:hover, div#info2 a:hover {
-    color: #1a2185;
+    color: #427992;
 }
 
 p.textParagraph {
     text-align: center;
     font-size: 2rem;
     margin: 0;
+    padding-right: 5vw;
+    padding-left: 5vw;
 }
 
 h1.welcome {
     text-align: center;
-    font-size: clamp(2rem, 5vw, 3.1rem);
+    font-size: clamp(2rem, 5vw, 3.5rem);
     margin-top: 0.7rem;
+    margin-bottom: 3.5rem;
 }
 
 nav ul{
@@ -78,7 +83,6 @@ nav ul{
     padding: 0.6rem;
     margin: 0;
     background-color:#11121a;
-    /*background: linear-gradient(90deg, #1e3a8a, #0f172a);*/
     list-style-type: none;
 }
 
@@ -292,13 +296,6 @@ p#textbtn {
   color: rgba(80, 220, 255, 0.5);
 }
 
-/*.win {
-  text-shadow: 
-    0 0 8px currentColor,
-    0 0 16px currentColor,
-    0 0 32px currentColor;
-}*/
-
 .win {
   animation: glowPulse 2.5s ease-in-out infinite;
 }
@@ -326,7 +323,6 @@ p#textbtn {
     opacity: 0.85;
   }
 }
-
 
 #board button:hover {
   transform: scale(1.05);
@@ -500,18 +496,21 @@ div#level-selection button:hover {
     align-items: center;
     justify-content: center;
     box-shadow: 0 0.125rem 0.3125rem rgba(0, 0, 0, 0.3);
+    transition: all 0.15s ease;
 }
 
 .cell.highlightRed {
   background-color: red;
   opacity: 0.5;
   cursor: pointer;
+  transform: scale(1.05);
 }
 
 .cell.highlightYellow {
   background-color: yellow;
   opacity: 0.4;
   cursor: pointer;
+  transform: scale(1.05);
 }
 
 .cell.win {
