@@ -170,7 +170,7 @@ async function singlePlayerMode (button) {
       }
       // HARD: vispirms uzvara/bloķēšana, ja nav -> minimax ar dziļumu 3 (chooseBestMove)
       else if (currentGameMode === "Hard") {
-        compCol = scoreCheck(computer) ?? scoreCheck(currentPlayer) ?? chooseBestMove(3, computer) ?? getRandomPosition(availableCols);
+        compCol = scoreCheck(computer) ?? scoreCheck(currentPlayer) ?? chooseBestMove(2, computer) ?? getRandomPosition(availableCols);
       }
       // REGULAR: tikai vienas gājiena prognoze (uzvara/bloķēšana) vai random
       else {

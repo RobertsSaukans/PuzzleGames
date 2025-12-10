@@ -241,8 +241,8 @@ document.addEventListener('DOMContentLoaded', function () {
    // Ja single-player režīms aktīvs, padod klikšķi uz singlePlayerMode.
    // Citādi — apstrādā X/O maiņu, uzvaras pārbaudes un UI atjaunināšanu.
    function BoardControlAndTwoPlayerMode(button) {
-        if (button.classList.contains("previewX") || button.classList.contains("previewO") || button.classList.contains("win")) {
-            button.classList.remove("previewX", "previewO", "win");
+        if (button.classList.contains("previewX") || button.classList.contains("previewO")) {
+            button.classList.remove("previewX", "previewO");
             button.textContent = "";
         }
         if (singlePlayerStart === true && gameover === false) {
