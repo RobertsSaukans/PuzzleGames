@@ -37,7 +37,7 @@ let losses = 0;
 const transposition = new Map();
 
 // Laika limits "Impossible" režīmam — var regulēt
-const IMPOSSIBLE_TIME_LIMIT = 900; // ms (700..1500 ieteicami)
+const IMPOSSIBLE_TIME_LIMIT = 900;
 
 // Sākotnējais UI: paslēpt noteiktus elementus
 returnDiv.style.display = 'none';
